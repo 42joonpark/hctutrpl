@@ -16,9 +16,11 @@ var (
 	output = flag.String("output", "", "file to store request result")
 )
 
-func main() {
+func init() {
 	flag.Parse()
+}
 
+func main() {
 	urlInput, _ := input.ReadUrl()
 	u, err := url.ParseRequestURI(urlInput)
 	if err != nil {
@@ -29,7 +31,7 @@ func main() {
 		Method: *method,
 		URL:    u,
 	}
-	fmt.Println(u.Hostname())
+
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Fatal(err)
